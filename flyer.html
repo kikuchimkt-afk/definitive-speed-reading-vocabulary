@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共通テスト速読語彙決定版 - Glamorous Editorial</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap');
+
+        :root {
+            --a4-width: 210mm;
+            --a4-height: 297mm;
+            /* Glamorous Colors */
+            --primary-grad: linear-gradient(135deg, #FF0080 0%, #7928CA 100%);
+            --accent-grad: linear-gradient(to right, #FF4B1F, #FF9068);
+            --sidebar-bg: #1a1a1a;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            background: #e5e5e5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Noto Sans JP', sans-serif;
+            gap: 20px;
+        }
+
+        /* -------------------------------------------------------------
+           Variation 1: Neon Dark & Vivid
+           - Dark sidebar, Vivid Header, Sharp Contrast
+        ------------------------------------------------------------- */
+        #v1 {
+            width: var(--a4-width);
+            height: var(--a4-height);
+            background: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #v1 .sidebar {
+            width: 32%;
+            background: var(--sidebar-bg);
+            color: white;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #v1 .sidebar h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 38pt;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            background: var(--primary-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #v1 .sidebar .catch {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+
+        #v1 .feature-list li {
+            margin-bottom: 25px;
+            list-style: none;
+            padding-left: 15px;
+            border-left: 3px solid #FF0080;
+        }
+
+        #v1 .feature-list h3 {
+            font-size: 12pt;
+            color: #FF9068;
+            margin-bottom: 5px;
+        }
+
+        #v1 .feature-list p {
+            font-size: 10pt;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        #v1 .main-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #v1 .header-band {
+            background: var(--primary-grad);
+            color: white;
+            padding: 15px 30px;
+            transform: skew(-15deg);
+            margin-left: -60px;
+            padding-left: 60px;
+            margin-bottom: 30px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            width: 110%;
+        }
+
+        #v1 .example-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 2px solid #e2e8f0;
+        }
+
+        #v1 .example-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent-grad);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(255, 75, 31, 0.4);
+        }
+
+        #v1 .q-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 18pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        #v1 .highlight {
+            color: #FF0080;
+            border-bottom: 2px dashed #FF0080;
+        }
+
+        #v1 .choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        #v1 .choice {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+            position: relative;
+        }
+
+        #v1 .choice.correct {
+            border-color: #10b981;
+            color: #10b981;
+            background: #ecfdf5;
+        }
+
+        #v1 .choice.wrong {
+            opacity: 0.6;
+        }
+
+        #v1 .explanation {
+            margin-top: 20px;
+            font-size: 10pt;
+            color: #666;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+        }
+
+        /* -------------------------------------------------------------
+           Variation 2: Elegant Pop (Pastel & Gradient)
+           - Rounded shapes, soft heavy shadows, friendly but pro
+        ------------------------------------------------------------- */
+        #v2 {
+            width: var(--a4-width);
+            height: var(--a4-height);
+            background: white;
+            position: relative;
+            overflow: hidden;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #v2-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(45deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 0;
+        }
+
+        #v2 .content {
+            z-index: 1;
+        }
+
+        #v2 .main-title {
+            font-size: 50pt;
+            font-weight: 900;
+            background: -webkit-linear-gradient(0deg, #8A2387, #E94057, #F27121);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        #v2 .sub-title {
+            font-size: 18pt;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+
+        #v2 .challenge-box {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 1);
+            margin-bottom: 40px;
+        }
+
+        #v2 .q-label {
+            background: #333;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 10pt;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        #v2 .choice-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        #v2 .choice-btn {
+            background: linear-gradient(to bottom, #fff, #f9f9f9);
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #555;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            text-align: center;
+        }
+
+        #v2 .logic-arrow {
+            text-align: center;
+            font-size: 24pt;
+            color: #E94057;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* -------------------------------------------------------------
+           Variation 3: Cyber Academic (Blue/Purple Tech)
+           - Grid backdrop, tech font, sharp lines
+        ------------------------------------------------------------- */
+        #v3 {
+            width: var(--a4-width);
+            height: var(--a4-height);
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #v3 .top-area {
+            height: 35%;
+            background: #1e1b4b;
+            /* Dark Indigo */
+            color: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        #v3 .top-area::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(90deg, #4f46e5, #ec4899);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+        }
+
+        #v3 h1 {
+            font-size: 42pt;
+            font-weight: 700;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+        }
+
+        #v3 .bottom-area {
+            flex: 1;
+            padding: 50px;
+            background: #f8fafc;
+        }
+
+        #v3 .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        #v3 .card {
+            background: white;
+            padding: 25px;
+            border-left: 5px solid #4f46e5;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        #v3 .example-section {
+            grid-column: 1 / -1;
+            background: #fff;
+            border: 2px solid #4f46e5;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* -------------------------------------------------------------
+           Variation 4: Clean Magazine (Bold Colors, White Space)
+           - Large bold typography, colorful numbers
+        ------------------------------------------------------------- */
+        #v4 {
+            width: var(--a4-width);
+            height: var(--a4-height);
+            background: white;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 40px;
+            position: relative;
+        }
+
+        #v4::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 33%;
+            background: #fffcdb;
+            /* Very light yellow */
+            z-index: 0;
+        }
+
+        #v4>* {
+            z-index: 1;
+        }
+
+        #v4 header {
+            grid-column: 1 / -1;
+            border-bottom: 5px solid #000;
+            padding-bottom: 20px;
+        }
+
+        #v4 h1 {
+            font-size: 60pt;
+            line-height: 0.8;
+            font-weight: 900;
+            color: #000;
+        }
+
+        #v4 h1 span {
+            color: #fca5a5;
+            /* Pastel Red */
+        }
+
+        #v4 .main-col {
+            padding-right: 20px;
+        }
+
+        #v4 .side-col {
+            padding-left: 20px;
+        }
+
+        #v4 .prob-box {
+            background: #111;
+            color: #fff;
+            padding: 30px;
+            border-radius: 0;
+            box-shadow: 10px 10px 0px #fdba74;
+            /* Orange Shadow */
+        }
+
+        #v4 .prob-text {
+            font-size: 16pt;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #v4 .ans-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            text-align: left;
+        }
+
+        #v4 .ans-btn.key {
+            background: #2dd4bf;
+            /* Teal */
+            color: #000;
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                gap: 0;
+            }
+
+            .page {
+                page-break-after: always;
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 
+      Variation 1: Neon Dark & Vivid
+    -->
+    <div id="v1" class="page">
+        <div class="sidebar">
+            <div>
+                <h1>CORE<br>VOCAB<br>MASTER</h1>
+                <div class="catch">共通テスト速読語彙決定版</div>
+
+                <div class="feature-list">
+                    <ul>
+                        <li>
+                            <h3>英検過去問徹底分析</h3>
+                            <p>最短ルートでスコアを伸ばす「鍵」語彙を厳選。</p>
+                        </li>
+                        <li>
+                            <h3>英語空所補充モード</h3>
+                            <p>文脈から正解を導く実践力を養成。</p>
+                        </li>
+                        <li>
+                            <h3>徹底した速読設計</h3>
+                            <p>想起スピードを上げ、長文読解の時間を創出。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="font-size:9pt; color:#666; text-align:center;">
+                © ECCベストワン藍住・北島中央
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="header-band">
+                <h2 style="font-size:20pt; font-weight:900; transform: skew(15deg);">CHALLENGE THIS!</h2>
+                <p style="font-size:10pt; transform: skew(15deg);">アナタはこの空所、瞬時に埋められますか？</p>
+            </div>
+
+            <h3 style="color:#333; margin-bottom:10px;">実際のアプリ出題例 [英検準1級レベル]</h3>
+            <p style="margin-bottom:20px; line-height:1.6;">共通テストでは、こうした「文脈に合う名詞」を選ぶ力が、長文読解のスピードと精度を左右します。</p>
+
+            <div class="example-card">
+                <div class="example-badge">LEVEL: HIGH</div>
+                <div class="q-text">
+                    "...so its <span class="highlight">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> for next
+                    year are good."
+                </div>
+                <p style="color:#666; margin-bottom:20px; font-size:11pt;">訳：...だから来年の見込みは良好です。</p>
+
+                <div class="choices">
+                    <div class="choice">religions</div>
+                    <div class="choice correct">prospects ⭕</div>
+                    <div class="choice">victims</div>
+                    <div class="choice">manuals</div>
+                </div>
+
+                <div class="explanation">
+                    <strong>💡 解説</strong><br>
+                    正解は <strong>prospects</strong>（見込み、将来の展望）。ビジネスの成長予測などで多用される重要語です。<br>
+                    他の選択肢：religions（宗教）、victims（犠牲者）、manuals（マニュアル）。
+                </div>
+            </div>
+
+            <div style="margin-top:auto; text-align:right;">
+                <h2 style="font-size:24pt; font-weight:900; color:#333;">結果を出すなら、今。</h2>
+                <p style="font-size:12pt; color:#FF0080; font-weight:bold;">教室で体験版公開中</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+      Variation 2: Elegant Pop
+    -->
+    <div id="v2" class="page">
+        <div id="v2-bg"></div>
+        <div class="content">
+            <div class="main-title">SPEED<br>& LOGIC</div>
+            <div class="sub-title">共通テスト速読語彙決定版</div>
+
+            <div class="challenge-box">
+                <div style="text-align:center;">
+                    <div class="q-label">Question No.05 [英語空所補充]</div>
+                    <div
+                        style="font-size:22pt; font-family:'Inter', sans-serif; font-weight:bold; color:#333; margin-bottom:20px;">
+                        "...so its <span style="color:#E94057; border-bottom:3px solid #E94057;">(
+                            &nbsp;&nbsp;&nbsp;&nbsp; )</span> for next year are good."
+                    </div>
+                </div>
+
+                <div class="choice-row">
+                    <div class="choice-btn">A. religions</div>
+                    <div class="choice-btn" style="background:#333; color:white; border-color:#333;">B. prospects</div>
+                </div>
+                <div class="choice-row">
+                    <div class="choice-btn">C. victims</div>
+                    <div class="choice-btn">D. manuals</div>
+                </div>
+
+                <div class="logic-arrow">⬇ Answer</div>
+
+                <div style="text-align:center; font-weight:bold; color:#333;">
+                    正解：prospects（見込み）
+                </div>
+                <p style="text-align:center; margin-top:10px; color:#666;">
+                    「来年は良い」という文脈から、未来の展望を表すprospectsが正解。<br>
+                    victim（犠牲者）などの紛らわしい選択肢に惑わされない力がつきます。
+                </p>
+            </div>
+
+            <div style="display:flex; gap:30px;">
+                <div style="flex:1;">
+                    <h3 style="color:#8A2387; font-size:16pt; margin-bottom:10px;">Analysis</h3>
+                    <p>英検過去問分析に基づくデータ駆動型学習。</p>
+                </div>
+                <div style="flex:1;">
+                    <h3 style="color:#F27121; font-size:16pt; margin-bottom:10px;">Training</h3>
+                    <p>4択パネル形式で、反射神経と語彙力を同時に鍛える。</p>
+                </div>
+            </div>
+
+            <div style="margin-top:auto; text-align:center; font-size:10pt; color:#999;">
+                © ECCベストワン藍住・北島中央
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+      Variation 3: Cyber Academic
+    -->
+    <div id="v3" class="page">
+        <div class="top-area">
+            <h1>VOCABULARY<br>REVOLUTION</h1>
+            <p style="font-size:14pt; opacity:0.8; margin-top:10px;">英検過去問 x 速読メソッド</p>
+        </div>
+
+        <div class="bottom-area">
+            <div class="feature-grid">
+                <div class="card">
+                    <h3>01. DATA</h3>
+                    <p>膨大な過去問データから抽出した「出る」単語のみを収録。無駄を徹底的に排除。</p>
+                </div>
+                <div class="card" style="border-left-color: #ec4899;">
+                    <h3>02. SPEED</h3>
+                    <p>思考停止時間をゼロへ。直感的なUIで圧倒的な演習量を確保します。</p>
+                </div>
+
+                <div class="example-section">
+                    <h3 style="color:#4f46e5; margin-bottom:15px;">TRY THIS QUESTION</h3>
+                    <div style="font-family:'Inter', sans-serif; font-size:16pt; font-weight:bold; margin-bottom:15px;">
+                        "...so its <span style="background:#e0e7ff; padding:0 10px; color:#4f46e5;">(
+                            &nbsp;&nbsp;&nbsp;&nbsp; )</span> for next year are good."
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        <div style="background:#eee; padding:10px; text-align:center;">religions</div>
+                        <div
+                            style="background:#4f46e5; color:white; padding:10px; text-align:center; font-weight:bold;">
+                            prospects</div>
+                        <div style="background:#eee; padding:10px; text-align:center;">victims</div>
+                        <div style="background:#eee; padding:10px; text-align:center;">manuals</div>
+                    </div>
+                    <p style="margin-top:15px; font-size:10pt;">
+                        <strong>prospects（見込み、将来性）</strong><br>
+                        文脈判断が求められる良問。スコアアップの鍵はここにあります。
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top:auto; text-align:center; padding-top:20px; color:#666;">
+                © ECCベストワン藍住・北島中央
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+      Variation 4: Clean Magazine (Bold)
+    -->
+    <div id="v4" class="page">
+        <header>
+            <h1>COMMON<span>TEST</span><br>MASTER</h1>
+        </header>
+
+        <div class="main-col">
+            <h2 style="font-size:24pt; color:#d97706; margin-bottom:20px;">あなたの語彙力は<br>「本物」ですか？</h2>
+            <p style="font-size:12pt;">ただ単語の意味を知っているだけでは、共通テストの壁は越えられません。文脈の中で瞬時に適切な語を選び取る「運用能力」が必要です。</p>
+            <p style="font-size:12pt; margin-top:20px;">
+                本アプリは<strong>「英語空所補充」</strong>に特化。英検過去問から厳選された良問を解きまくることで、読解スピードを劇的に向上させます。</p>
+
+            <div style="margin-top:50px;">
+                <h3 style="border-left:5px solid #d97706; padding-left:15px; font-size:16pt;">Features</h3>
+                <ul style="margin-top:15px; margin-left:20px; line-height:1.8;">
+                    <li>英検2級〜準1級レベルの徹底攻略</li>
+                    <li>脳の反射速度を高める4択パネルUI</li>
+                    <li>間違えた問題を自動でリスト化</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="side-col">
+            <div class="prob-box">
+                <div style="font-size:10pt; color:#fbbf24; margin-bottom:10px;">EXAMPLE QUESTION</div>
+                <div class="prob-text">
+                    ...so its ( ) for next year are good.
+                </div>
+                <div class="ans-btn">religions</div>
+                <div class="ans-btn key">prospects</div>
+                <div class="ans-btn">victims</div>
+                <div class="ans-btn">manuals</div>
+                <div style="margin-top:15px; font-size:9pt; line-height:1.4; color:#ccc;">
+                    文脈「来年は良い」から、未来を示す <strong>prospects(見込み)</strong> が正解。
+                </div>
+            </div>
+
+            <div style="margin-top:100px; text-align:right; font-weight:bold; color:#666;">
+                © ECCベストワン<br>藍住・北島中央
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

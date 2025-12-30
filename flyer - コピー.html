@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共通テスト速読語彙決定版 - ニュースレターバリエーション</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap');
+
+        :root {
+            /* Common */
+            --a4-width: 210mm;
+            --a4-height: 297mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            background: #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+        }
+
+        .page {
+            width: var(--a4-width);
+            height: var(--a4-height);
+            background: white;
+            position: relative;
+            overflow: hidden;
+            padding: 15mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+        }
+
+        .footer-copyright {
+            margin-top: auto;
+            text-align: center;
+            font-size: 10pt;
+            color: #666;
+            padding-top: 10mm;
+            width: 100%;
+        }
+
+        /* Common Content Text Styles */
+        p {
+            line-height: 1.8;
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        /* -------------------------------------------------------------
+           Design 1: Classic Academic (The "Standard" Newsletter)
+           - Serif headers, 2 columns, Divider lines
+           - Trustworthy, Serious
+        ------------------------------------------------------------- */
+        #d1 {
+            font-family: 'Shippori Mincho', serif;
+        }
+
+        #d1 header {
+            text-align: center;
+            border-bottom: 1px solid #000;
+            border-top: 4px double #000;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        #d1 h1 {
+            font-size: 32pt;
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+        }
+
+        #d1 .meta {
+            font-size: 11pt;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Noto Sans JP', sans-serif;
+            /* Mix font */
+            margin-top: 10px;
+        }
+
+        #d1 .main-body {
+            column-count: 2;
+            column-gap: 10mm;
+            column-rule: 1px solid #ddd;
+            flex: 1;
+            font-size: 11pt;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        #d1 h3 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 16pt;
+            border-bottom: 2px solid #333;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        #d1 .box {
+            border: 1px solid #000;
+            padding: 15px;
+            background: #f8f8f8;
+            margin-bottom: 25px;
+            break-inside: avoid;
+            font-family: 'Shippori Mincho', serif;
+            text-align: center;
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+        /* -------------------------------------------------------------
+           Design 2: Modern Editorial (Magazine/Brochure)
+           - Sans-serif, Bold headers, asymmetrical layout
+           - Clean, Smart
+        ------------------------------------------------------------- */
+        #d2 {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        #d2 .header-strip {
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: -15mm -15mm 30px -15mm;
+            /* Bleed top */
+        }
+
+        #d2 h1 {
+            font-size: 24pt;
+            font-weight: 900;
+        }
+
+        #d2 .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            height: 100%;
+        }
+
+        #d2 .sidebar {
+            background: #f4f4f5;
+            padding: 20px;
+            border-right: 4px solid #333;
+        }
+
+        #d2 .sidebar h3 {
+            font-size: 14pt;
+            color: #555;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        #d2 .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #d2 .sidebar li {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 2px solid #aaa;
+            font-size: 10pt;
+        }
+
+        #d2 .main-content h2 {
+            font-size: 20pt;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        #d2 .big-num {
+            font-size: 40pt;
+            font-weight: 900;
+            color: #ddd;
+            float: left;
+            line-height: 0.8;
+            margin-right: 15px;
+        }
+
+        /* -------------------------------------------------------------
+           Design 3: Minimalist Tech (Clean Outline)
+           - Monospaced feel elements, simple boxes, lots of white space
+           - Digital, Current
+        ------------------------------------------------------------- */
+        #d3 {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+
+        #d3 header {
+            text-align: left;
+            margin-bottom: 40px;
+            border-left: 10px solid #000;
+            padding-left: 20px;
+        }
+
+        #d3 h1 {
+            font-size: 36pt;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        #d3 .sub {
+            font-size: 14pt;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        #d3 section {
+            margin-bottom: 40px;
+        }
+
+        #d3 h3 {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 14pt;
+            margin-bottom: 20px;
+            transform: skew(-10deg);
+        }
+
+        #d3 p {
+            font-size: 11pt;
+            color: #444;
+            padding-left: 10px;
+            border-left: 1px solid #ccc;
+        }
+
+        /* -------------------------------------------------------------
+           Design 4: Soft Professional (Rounded)
+           - Very light grey backgrounds, rounded corners
+           - Friendly but serious
+        ------------------------------------------------------------- */
+        #d4 {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        #d4 header {
+            text-align: center;
+            background: #f3f4f6;
+            margin: -15mm -15mm 30px -15mm;
+            padding: 40px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        #d4 h1 {
+            font-size: 28pt;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        #d4 .tag {
+            background: #fff;
+            padding: 5px 20px;
+            border-radius: 20px;
+            border: 1px solid #d1d5db;
+            font-size: 11pt;
+            color: #6b7280;
+            display: inline-block;
+        }
+
+        #d4 .content-block {
+            background: #fff;
+            border: 1px solid #f3f4f6;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        #d4 h3 {
+            color: #111;
+            font-size: 15pt;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #d4 .icon {
+            width: 30px;
+            height: 30px;
+            background: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .page {
+                width: 100%;
+                height: 100%;
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 
+      Design 1: Classic Academic (Reliable / Newspaper feel)
+    -->
+    <div class="page" id="d1">
+        <header>
+            <h1>速読語彙通信</h1>
+            <div class="meta">
+                <span>[共通テスト対策特別号]</span>
+                <span>発行：ECCベストワン藍住・北島中央</span>
+            </div>
+        </header>
+
+        <div class="main-body">
+            <h3>英検過去問分析の理由</h3>
+            <p>共通テストの英語リーディングは、年々分量が増加傾向にあります。これに対応するためには、単語の意味を「思い出す」時間を極限までゼロに近づける必要があります。</p>
+            <p>市販の単語帳は網羅性が高い反面、「今すぐ得点に直結する単語」が埋もれがちです。そこで当校では、英検の過去問データを徹底的に分析。共通テストの難易度レベルにフィットし、かつ正解の鍵となる重要語彙（Core
+                Vocabulary）のみを抽出しました。</p>
+
+            <div class="box">
+                「英語空所補充」<br>ここがスコアの分かれ道
+            </div>
+
+            <h3>「英語空所補充」の実践力</h3>
+            <p>多くの受験生は「単語を見て日本語訳が言える」段階で満足してしまいます。しかし、本番で求められるのは文脈理解です。</p>
+            <p>本アプリの「英語空所補充モード」は、英文の穴埋め形式を採用。文脈（コンテキスト）から適切な語彙を推測し、選択するトレーニングを行います。これにより、単語の表面的な意味だけでなく、使い方やニュアンスまでを深く理解し、長文読解での「読み飛ばし」や「誤読」を防ぎます。
+            </p>
+
+            <h3>直結する速読力</h3>
+            <p>語彙の認知スピードが上がれば、脳のワーキングメモリ（作業領域）が開放され、その分を「文章の論理構成」の理解に回すことができます。これが本当の速読です。</p>
+            <p>「英語を見て、日本語が浮かぶまでのコンマ数秒」を削り取る。この微差の積み重ねが、共通テスト本番での10分、15分の余裕へと変わります。</p>
+        </div>
+
+        <div class="footer-copyright">
+            © ECCベストワン藍住・北島中央
+        </div>
+    </div>
+
+    <!-- 
+      Design 2: Modern Editorial (Clean, Asymmetric)
+    -->
+    <div class="page" id="d2">
+        <div class="header-strip">
+            <h1>VOCABULARY NEWS</h1>
+            <span style="font-weight:500;">Special Issue for Common Test</span>
+        </div>
+
+        <div class="grid-layout">
+            <div class="sidebar">
+                <h3>Highlights</h3>
+                <ul>
+                    <li>
+                        <strong>Past Exam Analysis</strong><br>
+                        英検過去問から導き出した、本当に必要な語彙リスト。
+                    </li>
+                    <li>
+                        <strong>Context Training</strong><br>
+                        文脈力を鍛える「空所補充」モードの搭載。
+                    </li>
+                    <li>
+                        <strong>Speed Reading</strong><br>
+                        反射速度を高め、試験時間を味方につける。
+                    </li>
+                </ul>
+                <div style="margin-top:50px; text-align:center;">
+                    <div style="font-size:30pt; font-weight:900;">A+</div>
+                    <div style="font-size:10pt;">Target Score</div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2>なぜ、「過去問」なのか。<br>なぜ、「空所補充」なのか。</h2>
+
+                <div class="text-block">
+                    <p><span
+                            class="big-num">01</span>共通テストの英語は、単なる知識量ではなく「情報処理能力」を問う試験へと変化しています。私たちの分析によれば、スコアのボトルネックになっているのは難解な構文ではなく、実は「中難易度語彙の想起遅延」です。
+                    </p>
+                    <p>英検過去問のデータセットは、このレベルの語彙を網羅する最適なリソースです。無駄を省き、核心を突く学習が可能になります。</p>
+                </div>
+
+                <div class="text-block" style="margin-top:40px;">
+                    <p><span
+                            class="big-num">02</span>「英語空所補充」は、単語学習の最終形態です。日本語訳を選ぶだけのドリルでは、実際の文章中での単語の働きが見えません。空所補充を行うことで、前後の文脈から意味を特定する「予測読み」の回路が脳内に形成されます。これこそが、ネイティブレベルの速読への第一歩です。
+                    </p>
+                </div>
+
+                <div style="margin-top:50px; border-top:2px solid #333; padding-top:20px; font-weight:bold;">
+                    ECC BestOne Aizumi / Kitajima-Chuo
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer embedded in layout for this design to keep sticky bottom feel -->
+        <div class="footer-copyright" style="position:absolute; bottom:0; left:0; padding:10px;">
+            © ECCベストワン藍住・北島中央
+        </div>
+    </div>
+
+    <!-- 
+      Design 3: Minimalist Tech (Bold & Efficient)
+    -->
+    <div class="page" id="d3">
+        <header>
+            <h1>速読語彙通信</h1>
+            <div class="sub">特集：共通テストを制する「決定版」アプローチ</div>
+        </header>
+
+        <main>
+            <section>
+                <h3>ANALYSIS</h3>
+                <p><strong>英検過去問の徹底分析</strong><br>
+                    私たちは「何が出るか」ではなく「何を知っていれば読めるか」に注目しました。学習効果の最大化を狙い、独自のアルゴリズムで英検過去問から必須語彙を抽出。最短ルートで合格レベルの語彙力を構築します。</p>
+            </section>
+
+            <section>
+                <h3>METHOD</h3>
+                <p><strong>「英語空所補充」の重要性</strong><br>
+                    単語帳を何周しても点数が伸びない。その原因は「使い方の欠如」にあります。文脈の中で適切な語を選ぶ「空所補充」トレーニングは、実戦形式に最も近い負荷を脳に与え、記憶の定着率を劇的に向上させます。</p>
+            </section>
+
+            <section>
+                <h3>SPEED</h3>
+                <p><strong>反射速度が読解速度を変える</strong><br>
+                    知っている単語でも、思い出すのに0.5秒かかれば遅すぎます。4択パネル形式の超高速演習で、その0.5秒を0.1秒へ。この「反射」の連続が、共通テストの圧倒的な速読力を生み出します。</p>
+            </section>
+
+            <div style="border: 2px dashed #000; padding:20px; text-align:center; font-weight:bold; margin-top:50px;">
+                ECCベストワン藍住・北島中央<br>
+                Official Learning Material
+            </div>
+        </main>
+
+        <div class="footer-copyright">
+            © ECCベストワン藍住・北島中央
+        </div>
+    </div>
+
+    <!-- 
+      Design 4: Soft Professional (Accessible & Clear)
+    -->
+    <div class="page" id="d4">
+        <header>
+            <h1>速読語彙通信</h1>
+            <div class="tag">共通テスト直前対策・特別号</div>
+        </header>
+
+        <div style="flex:1;">
+            <div class="content-block">
+                <h3>
+                    <div class="icon">🔍</div>英検過去問を分析する理由
+                </h3>
+                <p>共通テスト攻略の鍵は、実は英検2級〜準1級レベルの語彙力にあります。当校では過去問データを精密に分析し、試験に出る確率が高く、かつ文章理解の核となる単語を厳選しました。</p>
+            </div>
+
+            <div class="content-block">
+                <h3>
+                    <div class="icon">🧩</div>「英語空所補充」の重要性
+                </h3>
+                <p>ただの意味暗記は、本番では通用しません。文脈の中で正しい単語を選び取る「空所補充」トレーニングこそが、生きた英語力を育てます。前後の流れから推測する力は、そのまま長文読解の武器になります。</p>
+            </div>
+
+            <div class="content-block">
+                <h3>
+                    <div class="icon">⚡️</div>実は直結する速読力
+                </h3>
+                <p>「わかる」だけでなく「瞬時にわかる」状態へ。語彙の処理を自動化することで、脳のリソースを文章全体の理解に集中させることができます。これが、時間内に正確に読み解くための唯一の方法です。</p>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            © ECCベストワン藍住・北島中央
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1197,10 +1197,53 @@ function generatePDF(type, targetMode) {
     }, 500);
 }
 
+// --- Range Settings Auto-Save ---
+const RANGE_KEY = 'vocabMaster_rangeSettings';
+
+function saveRangeSettings() {
+    const settings = {
+        vocabStart: document.getElementById('vocab-start').value,
+        vocabEnd: document.getElementById('vocab-end').value,
+        fillStart: document.getElementById('fill-start').value,
+        fillEnd: document.getElementById('fill-end').value
+    };
+    localStorage.setItem(RANGE_KEY, JSON.stringify(settings));
+}
+
+function loadRangeSettings() {
+    const saved = localStorage.getItem(RANGE_KEY);
+    if (!saved) return;
+
+    try {
+        const settings = JSON.parse(saved);
+        const vs = document.getElementById('vocab-start');
+        const ve = document.getElementById('vocab-end');
+        const fs = document.getElementById('fill-start');
+        const fe = document.getElementById('fill-end');
+
+        if (vs && settings.vocabStart) vs.value = settings.vocabStart;
+        if (ve && settings.vocabEnd) ve.value = settings.vocabEnd;
+        if (fs && settings.fillStart) fs.value = settings.fillStart;
+        if (fe && settings.fillEnd) fe.value = settings.fillEnd;
+    } catch (e) {
+        console.error('Failed to load range settings', e);
+    }
+}
+
+// Attach listeners
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-input').forEach(input => {
+        input.addEventListener('change', saveRangeSettings);
+        input.addEventListener('input', saveRangeSettings);
+    });
+});
+
+
 // Initial Load
 loadSettings();
 loadFavorites();
 updateModeCounts();
+loadRangeSettings(); // Load user ranges after init
 
 // Force scroll to top on load
 window.scrollTo(0, 0);

@@ -42,9 +42,10 @@
                     <div class="mode-settings" onclick="event.stopPropagation()">
                         <div class="range-control-row">
                             <span class="label">実施範囲 ID:</span>
-                            <input type="number" id="vocab-start" value="1" min="1" class="mode-input">
+                            <input type="number" id="vocab-start" value="1" min="1" class="mode-input"
+                                inputmode="numeric">
                             <span class="sep">〜</span>
-                            <input type="number" id="vocab-end" value="" min="1" class="mode-input">
+                            <input type="number" id="vocab-end" value="" min="1" class="mode-input" inputmode="numeric">
                         </div>
                         <div class="range-control-row">
                             <label class="mode-checkbox">
@@ -68,9 +69,10 @@
                     <div class="mode-settings" onclick="event.stopPropagation()">
                         <div class="range-control-row">
                             <span class="label">実施範囲 ID:</span>
-                            <input type="number" id="fill-start" value="1" min="1" class="mode-input">
+                            <input type="number" id="fill-start" value="1" min="1" class="mode-input"
+                                inputmode="numeric">
                             <span class="sep">〜</span>
-                            <input type="number" id="fill-end" value="" min="1" class="mode-input">
+                            <input type="number" id="fill-end" value="" min="1" class="mode-input" inputmode="numeric">
                         </div>
                         <div class="range-control-row">
                             <label class="mode-checkbox">
@@ -120,7 +122,7 @@
         <!-- Favorites List Screen -->
         <div id="favorites-list-screen" class="screen">
             <header class="quiz-header">
-                <button class="back-btn" onclick="showStartScreen()">← Top</button>
+                <button class="back-btn home-btn" onclick="showStartScreen()"><span class="icon">🏠</span> ホーム</button>
                 <h2 id="fav-list-title">お気に入り一覧</h2>
                 <div style="width: 48px;"></div> <!-- Spacer for balance -->
             </header>
@@ -132,7 +134,8 @@
         <!-- Quiz Screen -->
         <div id="quiz-screen" class="screen">
             <header class="quiz-header">
-                <button id="quiz-top-btn" class="back-btn" onclick="showStartScreen()">Top</button>
+                <button id="quiz-top-btn" class="back-btn home-btn" onclick="showStartScreen()"><span
+                        class="icon">🏠</span> ホーム</button>
                 <div class="progress-container">
                     <div class="progress-label">
                         <span id="current-q">1</span> / <span id="total-q">10</span>
@@ -266,7 +269,7 @@
                 <h2>Result</h2>
                 <div class="final-score" id="final-score">8/10</div>
                 <p class="feedback-msg" id="feedback-msg">Great Job!</p>
-                <button class="restart-btn" onclick="showStartScreen()">Return to Top</button>
+                <button class="restart-btn" onclick="showStartScreen()"><span class="icon">🏠</span> ホームに戻る</button>
             </div>
         </div>
     </div>
