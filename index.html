@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共通テスト速読語彙決定版</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <button id="settings-trigger" class="settings-trigger" onclick="openSettings()">⚙️</button>
+            <header class="header">
+                <div class="logo">Ultimate Vocab <span class="badge">Challenge</span></div>
+                <h1>共通テスト速読語彙</h1>
+                <p class="subtitle">速読力・類推力・判断力を極める</p>
+                <p class="welcome-message" id="welcome-message"></p>
+
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="単語を検索..."
+                        onkeypress="handleSearchKey(event)">
+                    <button class="search-btn" onclick="executeSearch()">🔍</button>
+                </div>
+            </header>
+
+            <div class="mode-selection">
+                <!-- Vocab Mode Card -->
+                <div class="mode-card" onclick="startMode('vocab')">
+                    <div class="mode-header-row">
+                        <div class="mode-icon">あ</div>
+                        <div class="mode-info">
+                            <h2>日本語訳選択</h2>
+                            <p>英検2級アドバンスレベル</p>
+                            <p class="mode-stat">総問題数: <span id="vocab-total">0</span>問</p>
+                        </div>
+                    </div>
+                    <div class="mode-settings" onclick="event.stopPropagation()">
+                        <div class="range-control-row">
+                            <span class="label">実施範囲 ID:</span>
+                            <input type="number" id="vocab-start" value="1" min="1" class="mode-input">
+                            <span class="sep">〜</span>
+                            <input type="number" id="vocab-end" value="" min="1" class="mode-input">
+                        </div>
+                        <div class="range-control-row">
+                            <label class="mode-checkbox">
+                                <input type="checkbox" id="vocab-random" checked>
+                                ランダムに出題
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fill Mode Card -->
+                <div class="mode-card accent" onclick="startMode('fill')">
+                    <div class="mode-header-row">
+                        <div class="mode-icon">A</div>
+                        <div class="mode-info">
+                            <h2>英語語彙（空所補充）</h2>
+                            <p>英検準1級ベーシックレベル</p>
+                            <p class="mode-stat">総問題数: <span id="fill-total">0</span>問</p>
+                        </div>
+                    </div>
+                    <div class="mode-settings" onclick="event.stopPropagation()">
+                        <div class="range-control-row">
+                            <span class="label">実施範囲 ID:</span>
+                            <input type="number" id="fill-start" value="1" min="1" class="mode-input">
+                            <span class="sep">〜</span>
+                            <input type="number" id="fill-end" value="" min="1" class="mode-input">
+                        </div>
+                        <div class="range-control-row">
+                            <label class="mode-checkbox">
+                                <input type="checkbox" id="fill-random" checked>
+                                ランダムに出題
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="favorites-section">
+                <h3><span class="icon">★</span> 復習（お気に入り）</h3>
+                <div class="fav-grid">
+                    <button class="fav-card" onclick="openFavoritesList('vocab')">
+                        <span class="fav-label">日本語訳選択</span>
+                        <span class="fav-count" id="fav-count-vocab">0問</span>
+                    </button>
+                    <button class="fav-card" onclick="openFavoritesList('fill')">
+                        <span class="fav-label">英語空所補充</span>
+                        <span class="fav-count" id="fav-count-fill">0問</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="favorites-section mistakes-section">
+                <h3><span class="icon">❌</span> 復習（ミスした問題）</h3>
+                <div class="fav-grid">
+                    <button class="fav-card mistake-card" onclick="startApp('vocab', 'mistakes')">
+                        <span class="fav-label">日本語訳選択</span>
+                        <span class="fav-count mistake-count" id="mistake-count-vocab">0問</span>
+                    </button>
+                    <button class="fav-card mistake-card" onclick="startApp('fill', 'mistakes')">
+                        <span class="fav-label">英語空所補充</span>
+                        <span class="fav-count mistake-count" id="mistake-count-fill">0問</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Favorites List Screen -->
+        <div id="favorites-list-screen" class="screen">
+            <header class="quiz-header">
+                <button class="back-btn" onclick="showStartScreen()">← Top</button>
+                <h2 id="fav-list-title">お気に入り一覧</h2>
+                <div style="width: 48px;"></div> <!-- Spacer for balance -->
+            </header>
+            <div id="favorites-list-content" class="favorites-list">
+                <!-- Items generated by JS -->
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <header class="quiz-header">
+                <button id="quiz-top-btn" class="back-btn" onclick="showStartScreen()">Top</button>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="current-q">1</span> / <span id="total-q">10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" style="width: 10%"></div>
+                    </div>
+                </div>
+                <div class="score-display">Score: <span id="score">0</span></div>
+            </header>
+
+            <main class="quiz-content">
+                <div class="question-card">
+                    <div class="meta-info">
+                        <span class="source-tag" id="q-source">Source: 2017-1</span>
+                        <span class="mode-tag" id="q-mode">Mode</span>
+                    </div>
+                    <h2 id="q-text" class="question-text">Question goes here...</h2>
+                    <p id="q-context" class="context-text"></p>
+                </div>
+
+                <div id="choices-container" class="choices-grid">
+                    <!-- Buttons generated by JS -->
+                </div>
+
+                <div id="quiz-list-return" class="list-return-container hidden">
+                    <button id="return-list-btn-el" class="return-list-btn" onclick="returnToList()">
+                        <span class="icon">📋</span> お気に入り一覧に戻る
+                    </button>
+                </div>
+
+                <!-- Post Answer Control Bar -->
+                <div id="post-answer-bar" class="post-answer-bar hidden">
+                    <button class="nav-icon-btn" onclick="prevQuestion()">←</button>
+                    <button class="exp-trigger-btn" onclick="openExplanation()">解説を見る</button>
+                    <button class="nav-icon-btn" onclick="nextQuestion()">→</button>
+                </div>
+
+                <!-- Explanation Panel (Hidden by default) -->
+                <div id="explanation-panel" class="explanation-panel hidden">
+                    <div class="explanation-content">
+                        <div class="exp-header">
+                            <h3><span class="icon">💡</span> 解説</h3>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button id="close-exp-btn" class="fav-btn" onclick="closeExplanation()"
+                                    style="border:none; color:var(--text-sub); font-size:1rem; width:auto; padding:0 1rem; border-radius:20px; background:#f3f4f6;">
+                                    閉じる
+                                </button>
+                                <button id="fav-btn" class="fav-btn" onclick="toggleFavorite()">
+                                    <span class="star-icon">★</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="exp-text">Explanation content...</div>
+                        <div class="nav-buttons">
+                            <button class="prev-btn" onclick="prevQuestion()">← Prev</button>
+                            <button class="next-btn" onclick="nextQuestion()">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <button class="modal-close-btn" onclick="closeSettings()">×</button>
+                <h2>設定</h2>
+
+                <div class="form-group">
+                    <label for="user-name-input">お名前</label>
+                    <input type="text" id="user-name-input" placeholder="名前を入力してください">
+                </div>
+
+                <div class="form-group">
+                    <label>テーマ変更</label>
+                    <div class="theme-grid">
+                        <button class="theme-btn" data-theme="default" onclick="selectTheme('default')">
+                            <div class="theme-preview theme-default"></div>
+                            <span>Modern Glass</span>
+                        </button>
+                        <button class="theme-btn" data-theme="midnight" onclick="selectTheme('midnight')">
+                            <div class="theme-preview theme-midnight"></div>
+                            <span>Midnight Focus</span>
+                        </button>
+                        <button class="theme-btn" data-theme="nordic" onclick="selectTheme('nordic')">
+                            <div class="theme-preview theme-nordic"></div>
+                            <span>Nordic Forest</span>
+                        </button>
+                        <button class="theme-btn" data-theme="sunset" onclick="selectTheme('sunset')">
+                            <div class="theme-preview theme-sunset"></div>
+                            <span>Sunset Energy</span>
+                        </button>
+                        <button class="theme-btn" data-theme="mono" onclick="selectTheme('mono')">
+                            <div class="theme-preview theme-mono"></div>
+                            <span>Minimalist Mono</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>PDFリスト作成 (A4 / 2列 / 50語)</label>
+
+                    <div class="export-section">
+                        <div class="export-header"><span class="icon">★</span> お気に入り</div>
+                        <div class="export-actions">
+                            <button class="export-btn fav" onclick="generatePDF('favorites', 'vocab')">日本語訳選択</button>
+                            <button class="export-btn fav" onclick="generatePDF('favorites', 'fill')">英語空所補充</button>
+                        </div>
+                    </div>
+
+                    <div class="export-section" style="margin-top: 1rem;">
+                        <div class="export-header"><span class="icon">❌</span> ミス単語</div>
+                        <div class="export-actions">
+                            <button class="export-btn mistake"
+                                onclick="generatePDF('mistakes', 'vocab')">日本語訳選択</button>
+                            <button class="export-btn mistake" onclick="generatePDF('mistakes', 'fill')">英語空所補充</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="save-btn" onclick="saveSettings()">保存して閉じる</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen">
+            <div class="result-card">
+                <h2>Result</h2>
+                <div class="final-score" id="final-score">8/10</div>
+                <p class="feedback-msg" id="feedback-msg">Great Job!</p>
+                <button class="restart-btn" onclick="showStartScreen()">Return to Top</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
