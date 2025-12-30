@@ -61,7 +61,7 @@ body {
     font-family: 'Noto Sans JP', 'Inter', sans-serif;
     background: var(--bg-gradient);
     color: var(--text-main);
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -84,8 +84,8 @@ body {
     height: 100%;
     display: none;
     flex-direction: column;
-    padding: 1rem;
-    /* Mobile default */
+    padding: 1rem 1rem 8rem 1rem;
+    /* Mobile default with heavy bottom padding */
     opacity: 0;
     transition: opacity 0.3s ease;
     overflow-y: auto;
@@ -890,10 +890,16 @@ body.theme-midnight .mistake-card:hover {
 }
 
 /* Settings Button */
+/* Main Headers */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
 #settings-trigger {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     font-size: 1.5rem;
@@ -907,7 +913,8 @@ body.theme-midnight .mistake-card:hover {
     transition: all 0.3s ease;
     z-index: 100;
     margin: 0;
-    /* Reset margin */
+    flex-shrink: 0;
+    /* Prevent shrinking */
 }
 
 #settings-trigger:hover {
