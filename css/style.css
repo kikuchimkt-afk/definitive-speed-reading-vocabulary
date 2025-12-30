@@ -1355,3 +1355,38 @@ body.theme-midnight .export-btn.fav {
 body.theme-midnight .export-btn.mistake {
     color: #f87171;
 }
+
+/* PC Desktop Overrides */
+@media (min-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        display: block;
+        /* Disable flex centering to prevent cropping */
+        padding: 0;
+    }
+
+    #app {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        margin: 4rem auto;
+        /* Center horizontally with vertical spacing */
+        padding-bottom: 4rem;
+    }
+
+    .screen {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        padding: 3rem !important;
+        /* Reset mobile padding */
+        padding-bottom: 3rem !important;
+    }
+
+    .screen.active {
+        display: flex;
+        opacity: 1;
+    }
+}
