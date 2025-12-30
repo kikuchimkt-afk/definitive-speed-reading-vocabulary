@@ -52,10 +52,10 @@ function processFile(filename, type) {
     // Remove header
     const dataRows = rows.slice(1);
 
-    // Take top 10
-    const top10 = dataRows.slice(0, 10);
+    // Process all rows
+    const processed = dataRows.filter(row => row.length >= 3 && row[0]);
 
-    return top10.map(row => {
+    return processed.map(row => {
         // Translation Mode: ID, Source, Word, Correct, Wrong1, Wrong2, Wrong3, Example, Explanation
         if (type === 'vocab') {
             return {
