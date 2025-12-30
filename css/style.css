@@ -84,15 +84,26 @@ body {
     height: 100%;
     display: none;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
+    /* Mobile default */
     opacity: 0;
     transition: opacity 0.3s ease;
+    overflow-y: auto;
+    /* Enable vertical scroll */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scroll on iOS */
 }
 
 .screen.active {
     display: flex;
     opacity: 1;
     z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .screen {
+        padding: 2rem;
+    }
 }
 
 /* Favorites Section */
