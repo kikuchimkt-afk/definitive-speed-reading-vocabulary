@@ -1199,5 +1199,16 @@ function generatePDF(type, targetMode) {
 
 // Initial Load
 loadSettings();
-loadFavorites(); // Restore missing call
-updateModeCounts(); // New Init
+loadFavorites();
+updateModeCounts();
+
+// Force scroll to top on load
+window.scrollTo(0, 0);
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(s => s.scrollTop = 0);
+});

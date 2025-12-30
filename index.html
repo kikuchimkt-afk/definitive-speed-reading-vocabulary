@@ -26,11 +26,6 @@
                 <p class="subtitle">速読力・類推力・判断力を極める</p>
                 <p class="welcome-message" id="welcome-message"></p>
 
-                <div class="search-container">
-                    <input type="text" id="search-input" class="search-input" placeholder="単語を検索..."
-                        onkeypress="handleSearchKey(event)">
-                    <button class="search-btn" onclick="executeSearch()">🔍</button>
-                </div>
             </header>
 
             <div class="mode-selection">
@@ -113,6 +108,12 @@
                         <span class="fav-count mistake-count" id="mistake-count-fill">0問</span>
                     </button>
                 </div>
+            </div>
+
+            <div class="search-container" style="margin-top: 2rem; margin-bottom: 2rem;">
+                <input type="text" id="search-input" class="search-input" placeholder="単語を検索..."
+                    onkeypress="handleSearchKey(event)">
+                <button class="search-btn" onclick="executeSearch()">🔍</button>
             </div>
         </div>
 
